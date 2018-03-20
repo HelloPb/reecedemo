@@ -18,7 +18,8 @@ export class EmployeeAddComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private employeeService: EmployeeService) {
-    this.create();
+
+      this.create();
   }
 
   private create(): void {
@@ -57,9 +58,7 @@ export class EmployeeAddComponent implements OnInit {
 
       this.employeeService.post(emp).subscribe(x =>
         this.router.navigate([`/employee`]));
-
-      }
-
+    }
   }
 
   public cancel(): void {
@@ -69,8 +68,10 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   public ngOnInit() {
+
     this.route.data.subscribe((data: { employee: Employee }) => {
       this.update(data.employee);
     });
   }
+
 }

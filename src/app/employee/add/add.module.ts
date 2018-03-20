@@ -14,8 +14,8 @@ export class EmployeeAddModule { }
 
 @NgModule({
   exports: [
-    EmployeeAddRoutingModule,
-    EmployeeAddModule
+    EmployeeAddModule,
+    EmployeeAddRoutingModule
   ]
 })
 export class EmployeeAddExModule { }
