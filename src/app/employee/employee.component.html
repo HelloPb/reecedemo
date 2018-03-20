@@ -1,0 +1,84 @@
+<form [formGroup]="formGroup">
+
+  <div class="d-flex justify-content-end mb-1 mt-4">
+    <button class="btn btn-success" (click)="Add()">Add Employee</button>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr class="bg-secondary text-dark">
+        <th scope="col">
+          <div class="d-flex align-items-center minh-4-3r">
+            #
+          </div> 
+        <th scope="col" #fname="var" var="">
+          <div class="minw-17r minh-4-3r d-flex align-items-center justify-content-between">
+            <ng-container *ngIf="fname.var==false">First Name</ng-container>
+            <ng-container *ngIf="fname.var==true">
+              <input type="text" class="form-control-sm w-14r" id="fname" placeholder="First Name" formControlName="fname">
+            </ng-container>
+            <span>
+              <i class="fa fa-search mr-2 high" (click)="fname.var=!fname.var"></i>
+              <i class="fa fa-sort high" #fnameSort="var" var="" (click)="fnameSort.sort=!fnameSort.sort; sort('fname', fnameSort.var)"></i>
+            </span>
+          </div>
+        </th>
+        <th scope="col" #lname="var" var="">
+          <div class="minw-17r minh-4-3r d-flex align-items-center justify-content-between">
+            <ng-container *ngIf="lname.var==false || lname.var==undefined">Last Name</ng-container>
+            <ng-container *ngIf="lname.var==true">
+              <input type="text" class="form-control-sm w-14r" id="lname" placeholder="Last Name" formControlName="lname">
+            </ng-container>
+            <span>
+              <i class="fa fa-search mr-2 high" (click)="lname.var=!lname.var"></i>
+              <i class="fa fa-sort high" #lnameSort="var" var="" (click)="lnameSort.sort=!lnameSort.sort; sort('lname', lnameSort.var)"></i>
+            </span>
+          </div>
+        </th>
+        <th scope="col" #department="var" var="">
+          <div class="minw-17r minh-4-3r d-flex align-items-center justify-content-between">
+            <ng-container *ngIf="department.var==false || department.var==undefined">Department</ng-container>
+            <ng-container *ngIf="department.var==true">
+              <input type="text" class="form-control-sm w-14r" id="department" placeholder="Department" formControlName="department">
+            </ng-container>
+            <span>
+              <i class="fa fa-search mr-2 high" (click)="department.var=!department.var"></i>
+              <i class="fa fa-sort high" #departmentSort="var" var="" (click)="departmentSort.sort=!departmentSort.sort; sort('department', departmentSort.var)"></i>
+            </span>
+          </div>
+        </th>
+        <th scope="col">
+          <div class="d-flex align-items-center minh-4-3r">
+            Phone
+          </div>
+
+        </th>
+        <th scope="col">
+          <div class="d-flex align-items-center minh-4-3r">
+            Edit
+          </div>
+        </th>
+        <th scope="col">
+          <div class="d-flex align-items-center minh-4-3r">
+            Delete
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of emps$|async">
+        <th scope="row">{{emp.id}}</th>
+        <td>{{emp.fname}}</td>
+        <td>{{emp.lname}}</td>
+        <td>{{emp.department}}</td>
+        <td>{{emp.phone}}</td>
+        <td>
+          <i class="fa fa-edit text-primary high" (click)="edit(emp.id)"></i>
+        </td>
+        <td>
+          <i class="fa fa-trash text-danger high" (click)="delete(emp.id)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

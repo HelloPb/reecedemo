@@ -1,0 +1,24 @@
+.high {
+    font-size: 30px;
+}
+.high:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.minw-17r {
+    min-width: 12rem;
+}
+
+.minh-4-3r {
+    height: 4.375rem;
+}
+
+.w-14r {
+    width: 10rem;
+}
+
+.table th, .table td
+{
+    max-width: 13rem;;
+}
