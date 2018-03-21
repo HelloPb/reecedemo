@@ -20,9 +20,9 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   public emps$: Observable<Employee[]>;
   private subscriptions: Subscription[] = [];
   public formGroup: FormGroup;
-  private searchByFName$ = new Subject<string>();
-  private searchByLName$ = new Subject<string>();
-  private searchByDep$ = new Subject<string>();
+  public searchByFName$ = new Subject<string>();
+  public searchByLName$ = new Subject<string>();
+  public searchByDep$ = new Subject<string>();
 
   constructor(
     private route: ActivatedRoute,
@@ -58,35 +58,35 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   public searchByFName(): void {
 
-    this.subscriptions.push();
+    this.subscriptions.push(
+      this.searchByFName$.pipe(
+        debounceTime(100),
+        distinctUntilChanged(),
+        switchMap(text =>
+          this.employeeService.searchByFName(text)
+        )).subscribe(x => { this.emps$ = Observable.create(o => { o.next(x); o.complete(); }); }));
 
-    this.searchByFName$.pipe(
-      debounceTime(100),
-      distinctUntilChanged(),
-      switchMap(text =>
-        this.employeeService.searchByFName(text)
-      )).subscribe(x => { this.emps$ = Observable.create(o => { o.next(x); o.complete(); }); });
   }
 
   public searchByLName(): void {
-    this.subscriptions.push();
-    this.searchByLName$.pipe(
-      debounceTime(100),
-      distinctUntilChanged(),
-      switchMap(text =>
-        this.employeeService.searchByLName(text)
-      )).subscribe(x => { this.emps$ = Observable.create(o => { o.next(x); o.complete(); }); });
+    this.subscriptions.push(
+      this.searchByLName$.pipe(
+        debounceTime(100),
+        distinctUntilChanged(),
+        switchMap(text =>
+          this.employeeService.searchByLName(text)
+        )).subscribe(x => { this.emps$ = Observable.create(o => { o.next(x); o.complete(); }); }));
   }
 
   public searchByDepartment(): void {
-    this.subscriptions.push();
+    this.subscriptions.push(
 
-    this.searchByDep$.pipe(
-      debounceTime(100),
-      distinctUntilChanged(),
-      switchMap(text =>
-        this.employeeService.searchByDepartment(text)
-      )).subscribe(x => { this.emps$ = Observable.create(o => { o.next(x); o.complete(); }); });
+      this.searchByDep$.pipe(
+        debounceTime(100),
+        distinctUntilChanged(),
+        switchMap(text =>
+          this.employeeService.searchByDepartment(text)
+        )).subscribe(x => { this.emps$ = Observable.create(o => { o.next(x); o.complete(); }); }));
   }
 
   public ngOnInit() {

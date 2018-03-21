@@ -19,7 +19,7 @@ export class EmployeeAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private employeeService: EmployeeService) {
 
-      this.create();
+    this.create();
   }
 
   private create(): void {

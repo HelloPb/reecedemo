@@ -68,9 +68,9 @@
     <tbody>
       <tr *ngFor="let emp of emps$|async">
         <th scope="row">{{emp.id}}</th>
-        <td>{{emp.fname}}</td>
-        <td>{{emp.lname}}</td>
-        <td>{{emp.department}}</td>
+        <td id="fname">{{emp.fname}}</td>
+        <td id="lname">{{emp.lname}}</td>
+        <td id="department">{{emp.department}}</td>
         <td>{{emp.phone}}</td>
         <td>
           <i class="fa fa-edit text-primary high" (click)="edit(emp.id)"></i>
